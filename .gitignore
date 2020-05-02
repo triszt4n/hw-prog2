@@ -2,5 +2,3 @@
 *.o
 ./pizzman/bin
 ./pizzman/obj
-./pizzman/doxygen
-
