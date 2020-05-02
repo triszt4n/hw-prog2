@@ -1,0 +1,138 @@
+# depslib dependency file v1.0
+1588030486 source:c:\users\trisztan\documents\programming\pizzman\admin.cpp
+	"admin.h"
+	"profile.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588029986 c:\users\trisztan\documents\programming\pizzman\admin.h
+	<string>
+	<iostream>
+	"profile.h"
+
+1588030486 source:c:\users\trisztan\documents\programming\pizzman\customer.cpp
+	"customer.h"
+	"profile.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588024473 c:\users\trisztan\documents\programming\pizzman\customer.h
+	<string>
+	<iostream>
+	"profile.h"
+
+1588030486 source:c:\users\trisztan\documents\programming\pizzman\deliverer.cpp
+	"deliverer.h"
+	"profile.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588024473 c:\users\trisztan\documents\programming\pizzman\deliverer.h
+	<string>
+	<iostream>
+	"profile.h"
+
+1588030742 source:c:\users\trisztan\documents\programming\pizzman\order.cpp
+	"order.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588029921 c:\users\trisztan\documents\programming\pizzman\order.h
+	<iostream>
+	<string>
+	<ctime>
+	"pizza.h"
+	"list.hpp"
+
+1588030400 source:c:\users\trisztan\documents\programming\pizzman\pizza.cpp
+	"pizza.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588029917 c:\users\trisztan\documents\programming\pizzman\pizza.h
+	<iostream>
+	<string>
+	"list.hpp"
+	"topping.h"
+
+1588016618 source:c:\users\trisztan\documents\programming\pizzman\pizzman_main.cpp
+	<iostream>
+
+1588030724 source:c:\users\trisztan\documents\programming\pizzman\pizzman_test.cpp
+	<iostream>
+	"admin.h"
+	"customer.h"
+	"deliverer.h"
+	"list.hpp"
+	"order.h"
+	"pizza.h"
+	"profile_handler.h"
+	"topping.h"
+
+1588030400 source:c:\users\trisztan\documents\programming\pizzman\topping.cpp
+	"topping.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588029051 c:\users\trisztan\documents\programming\pizzman\topping.h
+	<iostream>
+	<string>
+
+1588030400 source:c:\users\trisztan\documents\programming\pizzman\profile.cpp
+	"profile.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588029979 c:\users\trisztan\documents\programming\pizzman\profile.h
+	<string>
+	<iostream>
+	<ctime>
+
+1588030400 source:c:\users\trisztan\documents\programming\pizzman\profile_handler.cpp
+	"profile_handler.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1588019763 c:\users\trisztan\documents\programming\pizzman\profile_handler.h
+	<iostream>
+	"profile.h"
+
+1588371504 c:\users\trisztan\documents\programming\pizzman\list.hpp
+	<cstdlib>
+	<stdexcept>
+
+1585521276 source:c:\users\trisztan\documents\programming\pizzman\memtrace.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"memtrace.h"
+
+1585521276 c:\users\trisztan\documents\programming\pizzman\memtrace.h
+	<new>
+	<cstdio>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<list>
+	<map>
+	<algorithm>
+	<functional>
+
+1588028151 c:\users\trisztan\documents\programming\pizzman\list.h
+	<cstdlib>
+
+1588028089 source:c:\users\trisztan\documents\programming\pizzman\list.cpp
+	"list.h"
+
