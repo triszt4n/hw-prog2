@@ -106,7 +106,7 @@ public:
         clearRec(head);
     }
 
-    iterator find(T& data) const {
+    iterator find(const T& data) const {
         for (iterator i = begin(); i != end(); ++i) {
             if (*i == data)
                 return i;

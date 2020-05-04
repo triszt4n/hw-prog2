@@ -7,10 +7,19 @@
 #include <iostream>
 #include <string>
 
-std::string Profile::getName() const {
-    return 0;
+/**
+ * @brief Simple getter for getting the username of object
+ * @return username
+ */
+std::string Profile::getUsername() const {
+    return username;
 }
 
+/**
+ * @brief Comparator for profiles
+ * @return true if their usernames are identical (it's their unique key)
+ * @see List<T>.find(const T& data)
+ */
 bool Profile::operator==(Profile& rhs) const {
-    return 0;
+    return username == rhs.getUsername();
 }

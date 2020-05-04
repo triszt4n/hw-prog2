@@ -8,8 +8,18 @@
 #include <iostream>
 #include <string>
 
-Rights Deliverer::verifyLogin(std::string username, std::string pw) const {
-    return NOT_MATCHING;
+/**
+ * @fn verifyLogin(std::string usern, std::string pw) in Deliverer
+ * @brief Grants the DELIVERER rights if the proper username and password is given
+ * @param usern - the username input
+ * @param pw - the password input
+ * @return DELIVERER if the credentials are identical, NOT_MATCHING otherwise
+ */
+Rights Deliverer::verifyLogin(std::string usern, std::string pw) const {
+    if (username == usern && password == pw)
+        return DELIVERER;
+    else
+        return NOT_MATCHING;
 }
 
 void Deliverer::save(std::ostream& os) const {

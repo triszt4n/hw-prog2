@@ -37,7 +37,7 @@ public:
         regDate = std::time(0);
     }
 
-    std::string getName() const;
+    std::string getUsername() const;
     bool operator==(Profile& rhs) const;
     virtual Rights verifyLogin(std::string username, std::string pw) const = 0;
     virtual void save(std::ostream& os) const = 0;

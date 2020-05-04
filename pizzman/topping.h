@@ -22,6 +22,7 @@ public:
 
     std::string getName() const;
     int getSerialNum() const;
+    double getPrice() const;
     bool operator==(Topping& rhs) const;
 };
 
