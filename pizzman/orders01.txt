@@ -1,0 +1,21 @@
+10
+0 8 trisztan 8 trisztan 9 nagy.elod 21 Veszprem, Damjanich 4 0 1589195227 1589205227 4
+10 Alles okay 0
+1 5 admin 5 admin 9 nagy.elod 30 Veszprem, Laszlo Lajos utca 10 1 1588295227 1588305227 4
+49 Ki volt hulve a pizza, rendelo sokat problemazott 0
+2 12 chickenapple 5 admin 14 kisscsillag985 26 Veszprem, Haszkovo u. 11/B 2 1589195227 1589205227 4
+0  0
+3 8 trisztan 0  0  11 Hold utca 1 1 1589195227 1589205227 5
+60 Rendelo hibas cimet adott, majd vissza is mondta a rendelest 0
+4 13 momplicated99 0  0  27 Buda, Karacs Terez utca 3/A 1 1588755103 0 1
+0  0
+5 10 asdfgh1024 8 trisztan 0  40 Godollo, Kisvercse ut SZTK rendelo porta 2 1589060627 0 2
+0  0
+6 8 trisztan 8 trisztan 14 kisscsillag985 21 Veszprem, Damjanich 4 0 1589195227 1589205227 3
+0  0
+7 7 kf19763 5 admin 0  0  0 1589195227 1589205227 5
+29 Hibas rendeles, admin torolte 0
+8 13 rattlesn4ke89 5 admin 9 nagy.elod 21 Veszprem, Damjanich 4 0 1589195227 1589205227 4
+0  0
+9 13 rattlesn4ke89 8 trisztan 10 starsky101 21 Veszprem, Damjanich 4 0 1589195227 1589205227 4
+0  0

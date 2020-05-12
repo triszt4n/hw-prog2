@@ -11,15 +11,17 @@
 
 class Admin: public Profile {
 public:
-    Admin(std::string username, std::string pw, std::string name):
+    Admin(): Profile("DUMMY", "", "") { }
+    Admin(const std::string& username, const std::string& pw = "", const std::string& name = ""):
         Profile(username, pw, name) { }
 
-    Rights verifyLogin(std::string username, std::string pw) const;
+    Rights verifyLogin(const std::string& username, const std::string& pw) const;
+    void greetings(std::ostream& os) const;
     void save(std::ostream& os) const;
-    void load(std::istream& is) const;
+    void load(std::istream& is);
 
     Admin* clone() const {
-        return new Admin(this->username, this->password, this->name);
+        return new Admin(username, password, name);
     }
 };
 

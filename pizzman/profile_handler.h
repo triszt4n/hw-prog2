@@ -13,11 +13,13 @@ class ProfileHandler {
         std::string key;
         Profile* value;
     };
-    static KVPair prototypes[3];
+
+    static const size_t PROF_NUMBER = 3;
+    KVPair prototypes[PROF_NUMBER];
 public:
     Profile* loadOne(std::istream& is);
-
-    ~ProfileHandler();
+    void setPrototypes();
+    void erasePrototypes();
 };
 
 #endif // PROFILE_HANDLER_H

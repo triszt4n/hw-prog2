@@ -11,15 +11,17 @@
 
 class Deliverer: public Profile {
 public:
-    Deliverer(std::string username, std::string pw, std::string name):
+    Deliverer(): Profile("DUMMY", "", "") { }
+    Deliverer(std::string username, std::string pw = "", std::string name = ""):
         Profile(username, pw, name) { }
 
-    Rights verifyLogin(std::string username, std::string pw) const;
+    Rights verifyLogin(const std::string& username, const std::string& pw) const;
+    void greetings(std::ostream& os) const;
     void save(std::ostream& os) const;
-    void load(std::istream& is) const;
+    void load(std::istream& is);
 
     Deliverer* clone() const {
-        return new Deliverer(this->username, this->password, this->name);
+        return new Deliverer(username, password, name);
     }
 };
 

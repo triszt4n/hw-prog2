@@ -4,6 +4,7 @@
 
 #include "admin.h"
 #include "profile.h"
+#include "usefulio.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -15,17 +16,31 @@
  * @param pw - the password input
  * @return ADMIN if the credentials are identical, NOT_MATCHING otherwise
  */
-Rights Admin::verifyLogin(std::string usern, std::string pw) const {
-    if (username == usern && password == pw)
+Rights Admin::verifyLogin(const std::string& usern, const std::string& pw) const {
+    if ((username == usern) && (password == pw))
         return ADMIN;
     else
         return NOT_MATCHING;
 }
 
-void Admin::save(std::ostream& os) const {
-
+void Admin::greetings(std::ostream& os) const {
+    os << "-------------------------" << std::endl;
+    os << "Hi, " << name << " (" << username << ")!" << std::endl;
+    os << "reg: " << ctime(&regDate);
+    os << "-------------------------" << std::endl << std::endl;
 }
 
-void Admin::load(std::istream& is) const {
+void Admin::save(std::ostream& os) const {
+    os << "admin ";
+    writeString(os, username);
+    writeString(os, password);
+    writeString(os, name);
+    os << regDate << std::endl;
+}
 
+void Admin::load(std::istream& is) {
+    username = readString(is);
+    password = readString(is);
+    name = readString(is);
+    is >> regDate;
 }

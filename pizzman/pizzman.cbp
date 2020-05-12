@@ -42,6 +42,8 @@
 		<Unit filename="list.hpp" />
 		<Unit filename="memtrace.cpp" />
 		<Unit filename="memtrace.h" />
+		<Unit filename="menus.hpp" />
+		<Unit filename="motor_functions.hpp" />
 		<Unit filename="order.cpp" />
 		<Unit filename="order.h" />
 		<Unit filename="pizza.cpp" />
@@ -53,13 +55,14 @@
 		<Unit filename="profile_handler.h" />
 		<Unit filename="topping.cpp" />
 		<Unit filename="topping.h" />
+		<Unit filename="usefulio.hpp" />
 		<Extensions>
 			<DoxyBlocks>
 				<comment_style block="0" line="2" />
 				<doxyfile_project />
 				<doxyfile_build />
 				<doxyfile_warnings />
-				<doxyfile_output html_help="1" rtf="1" />
+				<doxyfile_output html_help="1" />
 				<doxyfile_dot class_diagrams="1" />
 				<general use_at_in_tags="1" />
 			</DoxyBlocks>

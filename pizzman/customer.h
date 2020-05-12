@@ -13,16 +13,21 @@ class Customer: public Profile {
     std::string address;
     std::string mobile;
 public:
-    Customer(std::string username, std::string pw, std::string name, std::string addr, std::string mob):
+    Customer(): Profile("DUMMY", "", ""), address(""), mobile("") { }
+    Customer(std::string username, std::string pw = "", std::string name = "", std::string addr = "", std::string mob = ""):
         Profile(username, pw, name), address(addr), mobile(mob) { }
 
     std::string getAddress();
-    Rights verifyLogin(std::string username, std::string pw) const;
+    void setMobile(const std::string& mob);
+    void setAddress(const std::string& addr);
+
+    Rights verifyLogin(const std::string& username, const std::string& pw) const;
+    void greetings(std::ostream& os) const;
     void save(std::ostream& os) const;
-    void load(std::istream& is) const;
+    void load(std::istream& is);
 
     Customer* clone() const {
-        return new Customer(this->username, this->password, this->name, this->address, this->mobile);
+        return new Customer(username, password, name, address, mobile);
     }
 };
 

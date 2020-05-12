@@ -11,19 +11,24 @@
 class Topping {
     int serialNum;
     std::string name;
-    double price;
+    int price;
 public:
-    void save(std::ostream& os) const;
-    void load(std::istream& is) const;
-    Topping():
-        serialNum(0), name(""), price(0) { }
-    Topping(int serialNum, std::string name, double price):
+    void save(std::ostream& os);
+    bool load(std::istream& is);
+    Topping(const int& serialNum = -1, const std::string& name = "", const int& price = 0):
         serialNum(serialNum), name(name), price(price) { }
+    Topping(const Topping& topping) {
+        serialNum = topping.getSerialNum();
+        name = topping.getName();
+        price = topping.getPrice();
+    }
 
     std::string getName() const;
     int getSerialNum() const;
-    double getPrice() const;
-    bool operator==(Topping& rhs) const;
+    int getPrice() const;
+    bool operator==(const Topping& rhs) const;
+    Topping* clone() const;
+    //std::string getNameIfSameSerial(const int& serial) const;
 };
 
 #endif // TOPPING_H

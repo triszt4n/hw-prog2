@@ -31,43 +31,56 @@ class Order {
     std::string orderedBy;      ///<
     std::string acceptedBy;     ///< usernames of people
     std::string deliveredBy;    ///<
-    List<Pizza> items;
+    List<std::string> items;
     std::string shippingAddress;
     PaymentMethod payBy;
-    time_t* sentDate;
-    time_t* deliveredDate;
+    time_t sentDate;
+    time_t deliveredDate;
     OrderState state;
     std::string comment;
 public:
-    Order(int id, std::string orderedBy): id(id), orderedBy(orderedBy), acceptedBy(""), deliveredBy(""),
-        shippingAddress(""), payBy(CASH), sentDate(NULL), deliveredDate(NULL), state(UNSENT), comment("") { }
+    Order(int id = -1, std::string orderedBy = "", std::string acceptedBy = "",
+          std::string deliveredBy = "", std::string shippingAddress = "", PaymentMethod payBy = CASH,
+          time_t sentDate = 0, time_t deliveredDate = 0, OrderState state = UNSENT, std::string comment = ""
+          ):
+        id(id), orderedBy(orderedBy), acceptedBy(acceptedBy),
+        deliveredBy(deliveredBy), shippingAddress(shippingAddress), payBy(payBy),
+        sentDate(sentDate), deliveredDate(deliveredDate), state(state), comment(comment) { }
+    Order(const Order& order);
 
     void save(std::ostream& os) const;
-    void load(std::istream& is) const;
+    bool load(std::istream& is);
 
     ///getters
     int getId() const;
-    std::string getOrdedBy() const;
+    std::string getOrderedBy() const;
     std::string getAcceptedBy() const;
     std::string getDeliveredBy() const;
+    std::string getShippingAddress() const;
+    PaymentMethod getPayBy() const;
+    time_t getSentDate() const;
+    time_t getDeliveredDate() const;
     OrderState getState() const;
+    std::string getComment() const;
+    friend void copyItems(const Order& orderSource, Order& orderDest);
 
     void displayOrder(std::ostream& os) const;
 
     ///setters:
-    void appendPizza(int serialNum);
-    void addTopping(int index, int serialNumOfTopping);
-    void setShippingAddress(std::string sA);
-    void setPayBy(int choice);
-    void setComment(std::string comment);
+    void appendPizza(const int& serialNum, List<Pizza*>& pizzas);
+    void addTopping(const int& index, const int& serialNumOfTopping, List<Topping*>& toppings);
+    void setShippingAddress(const std::string& sA);
+    void setPayBy(const int& choice);
+    void setComment(const std::string& comment);
 
     ///Commands to change state of order
-    bool sendOrder(std::string username);
-    bool acceptOrder(std::string username);
-    bool deliverOrder(std::string username);
-    bool closeOrder(std::string username, bool success);
+    void sendOrder(const std::string& username);
+    void acceptOrder(const std::string& username);
+    void deliverOrder(const std::string& username);
+    void closeOrder(bool success, const std::string& comment = "");
 
-    bool operator==(Order& rhs) const;
+    bool operator==(const Order& rhs) const;
+    Order* clone() const;
 };
 
 #endif // ORDER_H

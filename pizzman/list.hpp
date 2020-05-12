@@ -7,8 +7,7 @@
 
 #include <cstdlib>
 #include <stdexcept>
-
-
+#include "profile.h"
 
 /**
  * @class List
@@ -20,22 +19,21 @@ class List {
         T data;
         ListItem* next;
         ListItem(ListItem* p = NULL): next(p) { }
-    };
 
-    /**
-     * @brief This recursive function solves freeing of every element
-     */
-    void clearRec(ListItem* item) {
-        if (item != NULL) {
-            clearRec(item->next);
-            delete item;
-        }
-    }
+        ListItem& operator=(const ListItem);
+    };
 
     ListItem* head;
     ListItem* tail;
     size_t number;
+
+    List(const List&);
+    List& operator=(const List&);
 public:
+    /**
+     * @class List::iterator
+     * @brief lovely iterator for our List
+     */
     class iterator {
         ListItem* actual;
     public:
@@ -43,10 +41,20 @@ public:
 
         iterator(const List& l): actual(l.head) {
             if (actual->next == NULL)
-                    actual = NULL;
+                actual = NULL;
         }
 
-        iterator(const iterator& i): actual(i.getActual()) { }
+        iterator(const iterator& iter) {
+            *this = iter;
+        }
+
+        void operator=(const iterator& rhs) {
+            actual = rhs.getActual();
+        }
+
+        ListItem* getActual() const {
+            return actual;
+        }
 
         ~iterator() { delete actual; }
 
@@ -56,91 +64,109 @@ public:
                 if (actual->next == NULL)
                     actual = NULL;
             }
-            return *this;
-
+            return (*this);
         }
 
-        iterator operator++(int) {
-            iterator temp(*this);
+        iterator& operator++(int) {
+            iterator temp = (*this);
             operator++();
             return temp;
         }
 
         T& operator*() {
-            if (actual == NULL)
-                throw std::out_of_range("List is empty.");
-            else
+            if (actual != NULL)
                 return actual->data;
+            else
+                throw std::out_of_range("List is empty.");
         }
 
-        ListItem* getActual() const {
-            return actual;
+        T* operator->() {
+            if (actual != NULL)
+                return &actual->data;
+            else
+                throw std::out_of_range("List is empty.");
         }
+
 
         bool operator==(const iterator& rhs) const {
-            return (rhs.getActual() == actual);
+            return (rhs.actual == actual);
         }
 
         bool operator!=(const iterator& rhs) const {
-            return (rhs.getActual() != actual);
+            return (rhs.actual != actual);
         }
     };
 
-    List(): number(0) { head = tail = new ListItem; }
-    ~List() { clear(); }
+    List(): number(0) { head = tail = new ListItem(); }
+    ~List() {
+        clear();
+        delete head;
+    }
 
     size_t size() const {
         return number;
     }
-    T& getFirst() const {
-        return head->data;
-    }
 
+    /**
+     * @fn insert(T)
+     * @brief inserts an item into the list (at the tail)
+     */
     void insert(const T& data) {
         tail->data = data;
         tail->next = new ListItem;
         tail = tail->next;
         number++;
     }
+
+    /**
+     * @fn clear()
+     * @brief frees all the items in list
+     */
     void clear() {
-        clearRec(head);
+        ListItem* item;
+        while ((item = head) != NULL) {
+            head = item->next;
+            delete item;
+        }
+        head = tail = new ListItem();
+        number = 0;
     }
 
-    iterator find(const T& data) const {
+    // DEPRECATED: DIDN'T USE IT EVER
+    /**
+     * @fn find_p(T): iterator
+     * @brief method assumes T is a pointer itself, finds element in list
+     * Uses indirection to access operator== of any specific type (Profile, Pizza, Topping, Order)
+     * @return an iterator with the found item
+     */
+    iterator find_p(const T& data) {
         for (iterator i = begin(); i != end(); ++i) {
-            if (*i == data)
+            if (*(*i) == (*data))
                 return i;
         }
-
         return iterator();
     }
+
+    /// Typical begin()
     iterator begin() const {
         return iterator(*this);
     }
+
+    /// Typical end()
     iterator end() const {
         return iterator();
     }
 
-    T& operator[](size_t index) {
-        iterator iter = begin();
-        for (size_t i = 0; i < index; ++i) {
-            if (iter == end())
-                throw std::out_of_range("Error at indexing of list.");
-            else
-                ++iter;
+    /// Interesting indexing operator
+    T operator[](const size_t& index) {
+        T found;
+        size_t i = 0;
+        for (iterator iter = begin(); iter != end(); ++iter) {
+            if (i == index)
+                return *iter;
+            ++i;
         }
-        return *iter;
-    }
-
-    T operator[](size_t index) const {
-        iterator iter = begin();
-        for (size_t i = 0; i < index; ++i) {
-            if (iter == end())
-                throw std::out_of_range("Error at indexing of list.");
-            else
-                ++iter;
-        }
-        return *iter;
+        return found;
     }
 };
 

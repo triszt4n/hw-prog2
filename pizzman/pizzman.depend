@@ -136,43 +136,46 @@
 1588028089 source:c:\users\trisztan\documents\programming\pizzman\list.cpp
 	"list.h"
 
-1588030486 source:c:\users\trisztan\documents\programming\myhw\pizzman\admin.cpp
+1589239587 source:c:\users\trisztan\documents\programming\myhw\pizzman\admin.cpp
 	"admin.h"
 	"profile.h"
+	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
 
-1588029986 c:\users\trisztan\documents\programming\myhw\pizzman\admin.h
+1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\admin.h
 	<string>
 	<iostream>
 	"profile.h"
 
-1588458981 c:\users\trisztan\documents\programming\myhw\pizzman\profile.h
+1589239604 c:\users\trisztan\documents\programming\myhw\pizzman\profile.h
 	<string>
 	<iostream>
 	<ctime>
 
-1588030486 source:c:\users\trisztan\documents\programming\myhw\pizzman\customer.cpp
+1589245005 source:c:\users\trisztan\documents\programming\myhw\pizzman\customer.cpp
 	"customer.h"
 	"profile.h"
+	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
 
-1588024473 c:\users\trisztan\documents\programming\myhw\pizzman\customer.h
+1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\customer.h
 	<string>
 	<iostream>
 	"profile.h"
 
-1588030486 source:c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.cpp
+1589239665 source:c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.cpp
 	"deliverer.h"
 	"profile.h"
+	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
 
-1588024473 c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.h
+1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.h
 	<string>
 	<iostream>
 	"profile.h"
@@ -198,63 +201,136 @@
 	<algorithm>
 	<functional>
 
-1588459359 source:c:\users\trisztan\documents\programming\myhw\pizzman\order.cpp
+1589276460 source:c:\users\trisztan\documents\programming\myhw\pizzman\order.cpp
 	"order.h"
+	"list.hpp"
+	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
+	<ctime>
 
-1588029921 c:\users\trisztan\documents\programming\myhw\pizzman\order.h
+1589273832 c:\users\trisztan\documents\programming\myhw\pizzman\order.h
 	<iostream>
 	<string>
 	<ctime>
 	"pizza.h"
 	"list.hpp"
 
-1588029917 c:\users\trisztan\documents\programming\myhw\pizzman\pizza.h
+1589271391 c:\users\trisztan\documents\programming\myhw\pizzman\pizza.h
 	<iostream>
 	<string>
 	"list.hpp"
 	"topping.h"
 
-1588458532 c:\users\trisztan\documents\programming\myhw\pizzman\list.hpp
+1589298823 c:\users\trisztan\documents\programming\myhw\pizzman\list.hpp
 	<cstdlib>
 	<stdexcept>
+	"profile.h"
 
-1588457929 c:\users\trisztan\documents\programming\myhw\pizzman\topping.h
+1589273430 c:\users\trisztan\documents\programming\myhw\pizzman\topping.h
 	<iostream>
 	<string>
 
-1588016618 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizzman_main.cpp
-	<iostream>
-
-1588459033 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile.cpp
-	"profile.h"
+1589283524 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizzman_main.cpp
 	<cstdlib>
 	<iostream>
 	<string>
-
-1588030400 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.cpp
-	"profile_handler.h"
-	<cstdlib>
-	<iostream>
-	<string>
-
-1588019763 c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.h
-	<iostream>
+	<ctime>
+	<fstream>
+	<iomanip>
+	<exception>
+	"memtrace.h"
+	"admin.h"
 	"profile.h"
-
-1588458903 source:c:\users\trisztan\documents\programming\myhw\pizzman\topping.cpp
+	"customer.h"
+	"deliverer.h"
+	"list.hpp"
+	"pizza.h"
+	"order.h"
 	"topping.h"
+	"profile_handler.h"
+	"usefulio.hpp"
+	"motor_functions.hpp"
+	"menus.hpp"
+
+1589234445 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile.cpp
+	"profile.h"
 	<cstdlib>
 	<iostream>
 	<string>
 
-1588458909 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizza.cpp
+1589244256 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.cpp
+	"profile_handler.h"
+	"admin.h"
+	"customer.h"
+	"deliverer.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1589103733 c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.h
+	<iostream>
+	"profile.h"
+
+1589273430 source:c:\users\trisztan\documents\programming\myhw\pizzman\topping.cpp
+	"topping.h"
+	"usefulio.hpp"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1589298232 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizza.cpp
 	"pizza.h"
 	"list.hpp"
 	"topping.h"
+	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
+
+1589149780 c:\users\trisztan\documents\programming\myhw\pizzman\usefulio.hpp
+	<iostream>
+	<string>
+	<cstdlib>
+
+1589297433 c:\users\trisztan\documents\programming\myhw\pizzman\motor_functions.hpp
+	<cstdlib>
+	<iostream>
+	<string>
+	<ctime>
+	<fstream>
+	<iomanip>
+	"memtrace.h"
+	"admin.h"
+	"profile.h"
+	"customer.h"
+	"deliverer.h"
+	"list.hpp"
+	"pizza.h"
+	"order.h"
+	"topping.h"
+	"profile_handler.h"
+	"usefulio.hpp"
+
+1589298492 c:\users\trisztan\documents\programming\myhw\pizzman\menus.hpp
+	<cstdlib>
+	<iostream>
+	<string>
+	<ctime>
+	<fstream>
+	<iomanip>
+	<exception>
+	"memtrace.h"
+	"admin.h"
+	"profile.h"
+	"customer.h"
+	"deliverer.h"
+	"list.hpp"
+	"pizza.h"
+	"order.h"
+	"topping.h"
+	"profile_handler.h"
+	"usefulio.hpp"
+	"motor_functions.hpp"
 

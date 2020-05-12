@@ -3,16 +3,42 @@
  */
 
 #include "topping.h"
+#include "usefulio.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
-void Topping::save(std::ostream& os) const {
+/**
+ * @brief Helper function for toString() in Pizza
+ * @return the name of topping, if the serial is the same
+ */
+/*std::string Topping::getNameIfSameSerial(const int& serial) const {
+    if (serialNum == serial)
+        return name;
+    else
+        return std::string("");
+}*/
 
+/**
+ * @brief Saver method, saves attributes into stream
+ */
+void Topping::save(std::ostream& os) {
+    os << serialNum << " ";
+    writeString(os, name);
+    os << price << std::endl;
 }
 
-void Topping::load(std::istream& is) const {
-
+/**
+ * @brief Loader method, loads attributes from stream
+ * @return true if stream reading was a success
+ */
+bool Topping::load(std::istream& is) {
+    (is >> serialNum).ignore(1);
+    name = readString(is);
+    is >> price;
+    if (is.fail())
+        return false;
+    return true;
 }
 
 /**
@@ -35,7 +61,7 @@ int Topping::getSerialNum() const {
  * @brief Simple getter for price of topping
  * @return price
  */
-double Topping::getPrice() const {
+int Topping::getPrice() const {
     return price;
 }
 
@@ -44,6 +70,10 @@ double Topping::getPrice() const {
  * @return true if their serialNum are identical (it's their unique key)
  * @see List<T>.find(const T& data)
  */
-bool Topping::operator==(Topping& rhs) const {
+bool Topping::operator==(const Topping& rhs) const {
     return serialNum == rhs.getSerialNum();
+}
+
+Topping* Topping::clone() const {
+    return new Topping(*this);
 }

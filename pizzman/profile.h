@@ -31,17 +31,19 @@ protected:
     std::string name;
     time_t regDate; ///< Will be assigned automatically upon creation
 public:
-    Profile(std::string username, std::string pw, std::string name):
+    Profile(const std::string& username, const std::string& pw = "", const std::string& name = ""):
         username(username), password(pw), name(name)
     {
         regDate = std::time(0);
     }
 
     std::string getUsername() const;
-    bool operator==(Profile& rhs) const;
-    virtual Rights verifyLogin(std::string username, std::string pw) const = 0;
+    std::string getName() const;
+    bool operator==(const Profile& rhs) const;
+    virtual Rights verifyLogin(const std::string& username, const std::string& pw) const = 0;
+    virtual void greetings(std::ostream& os) const = 0;
     virtual void save(std::ostream& os) const = 0;
-    virtual void load(std::istream& is) const = 0;
+    virtual void load(std::istream& is) = 0;
     virtual Profile* clone() const = 0;
     virtual ~Profile() { }
 };
