@@ -1,5 +1,6 @@
 /**
- * @file deliverer.cpp
+ * \file deliverer.cpp
+ * @brief Deliverer class definitions
  */
 
 #include "deliverer.h"
@@ -10,7 +11,6 @@
 #include <string>
 
 /**
- * @fn verifyLogin(std::string usern, std::string pw) in Deliverer
  * @brief Grants the DELIVERER rights if the proper username and password is given
  * @param usern - the username input
  * @param pw - the password input
@@ -23,13 +23,25 @@ Rights Deliverer::verifyLogin(const std::string& usern, const std::string& pw) c
         return NOT_MATCHING;
 }
 
+/**
+ * @brief Greets logged in user
+ */
 void Deliverer::greetings(std::ostream& os) const {
-    os << "-------------------------" << std::endl;
-    os << "Hi, " << name << " (" << username << ")!" << std::endl;
-    os << "reg: " << ctime(&regDate);
-    os << "-------------------------" << std::endl << std::endl;
+    os << "---------------------------------------------" << std::endl;
+    os << " Hi, " << name << " (" << username << ")!" << std::endl;
+    os << " registered on: " << ctime(&regDate);
+    os << "---------------------------------------------" << std::endl << std::endl;
 }
 
+
+
+
+
+/// -------------------- Persistence -------------------
+
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Deliverer::save(std::ostream& os) const {
     os << "deliverer ";
     writeString(os, username);
@@ -38,9 +50,14 @@ void Deliverer::save(std::ostream& os) const {
     os << regDate << std::endl;
 }
 
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Deliverer::load(std::istream& is) {
     username = readString(is);
     password = readString(is);
     name = readString(is);
     is >> regDate;
 }
+
+/// ----------------- End of Persistence ----------------

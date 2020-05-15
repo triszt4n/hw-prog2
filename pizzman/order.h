@@ -1,5 +1,6 @@
 /**
  * @file order.h
+ * @brief Order class declaration
  */
 
 #ifndef ORDER_H
@@ -11,6 +12,11 @@
 #include "pizza.h"
 #include "list.hpp"
 
+
+/**
+ * @enum OrderState
+ * @brief Enumerator for defining the state of the order
+ */
 enum OrderState {
     UNSENT,
 	SENT,
@@ -20,18 +26,28 @@ enum OrderState {
 	FAILED
 };
 
+/**
+ * @enum Rights
+ * @brief Enumerator for defining the payment method of the order
+ */
 enum PaymentMethod {
     CASH,
 	BANK_CARD,
 	VOUCHER
 };
 
+
+/**
+ * @class Order
+ * @brief Model for order
+ * @see private data items is a List of Pizza
+ */
 class Order {
     int id;
     std::string orderedBy;      ///<
     std::string acceptedBy;     ///< usernames of people
     std::string deliveredBy;    ///<
-    List<std::string> items;
+    List<Pizza> items;
     std::string shippingAddress;
     PaymentMethod payBy;
     time_t sentDate;
@@ -41,15 +57,17 @@ class Order {
 public:
     Order(int id = -1, std::string orderedBy = "", std::string acceptedBy = "",
           std::string deliveredBy = "", std::string shippingAddress = "", PaymentMethod payBy = CASH,
-          time_t sentDate = 0, time_t deliveredDate = 0, OrderState state = UNSENT, std::string comment = ""
-          ):
-        id(id), orderedBy(orderedBy), acceptedBy(acceptedBy),
-        deliveredBy(deliveredBy), shippingAddress(shippingAddress), payBy(payBy),
-        sentDate(sentDate), deliveredDate(deliveredDate), state(state), comment(comment) { }
+          time_t sentDate = 0, time_t deliveredDate = 0, OrderState state = UNSENT, std::string comment = ""):
+        id(id), orderedBy(orderedBy), acceptedBy(acceptedBy), deliveredBy(deliveredBy),
+        shippingAddress(shippingAddress), payBy(payBy), sentDate(sentDate),
+        deliveredDate(deliveredDate), state(state), comment(comment) { }
     Order(const Order& order);
+    Order& operator=(const Order& order);
+    friend void copyItems(const Order& orderSource, Order& orderDest);
 
+    ///persistence
     void save(std::ostream& os) const;
-    bool load(std::istream& is);
+    bool load(std::istream& is, List<Topping*>& toppings);
 
     ///getters
     int getId() const;
@@ -62,18 +80,16 @@ public:
     time_t getDeliveredDate() const;
     OrderState getState() const;
     std::string getComment() const;
-    friend void copyItems(const Order& orderSource, Order& orderDest);
-
     void displayOrder(std::ostream& os) const;
 
-    ///setters:
-    void appendPizza(const int& serialNum, List<Pizza*>& pizzas);
-    void addTopping(const int& index, const int& serialNumOfTopping, List<Topping*>& toppings);
+    ///setters
+    void addPizza(const int& serialNum, List<Pizza*>& pizzas);
+    void addTopping(const size_t& index, const int& serialNumOfTopping, List<Topping*>& toppings);
     void setShippingAddress(const std::string& sA);
     void setPayBy(const int& choice);
     void setComment(const std::string& comment);
 
-    ///Commands to change state of order
+    ///state modifiers
     void sendOrder(const std::string& username);
     void acceptOrder(const std::string& username);
     void deliverOrder(const std::string& username);

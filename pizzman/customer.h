@@ -1,5 +1,6 @@
 /**
  * @file customer.h
+ * @brief Customer class declaration
  */
 
 #ifndef CUSTOMER_H
@@ -9,6 +10,10 @@
 #include <iostream>
 #include "profile.h"
 
+/**
+ * @class Customer
+ * @brief Child class of a Profile, defines a customer's attributes
+ */
 class Customer: public Profile {
     std::string address;
     std::string mobile;
@@ -22,7 +27,9 @@ public:
     void setAddress(const std::string& addr);
 
     Rights verifyLogin(const std::string& username, const std::string& pw) const;
+
     void greetings(std::ostream& os) const;
+
     void save(std::ostream& os) const;
     void load(std::istream& is);
 

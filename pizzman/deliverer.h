@@ -1,5 +1,6 @@
 /**
- * @file delieverer.h
+ * @file deliverer.h
+ * @brief Deliverer class declaration
  */
 
 #ifndef DELIVERER_H
@@ -9,6 +10,10 @@
 #include <iostream>
 #include "profile.h"
 
+/**
+ * @class Deliverer
+ * @brief Child class of a Profile, defines a deliverer's attributes
+ */
 class Deliverer: public Profile {
 public:
     Deliverer(): Profile("DUMMY", "", "") { }
@@ -16,6 +21,7 @@ public:
         Profile(username, pw, name) { }
 
     Rights verifyLogin(const std::string& username, const std::string& pw) const;
+
     void greetings(std::ostream& os) const;
     void save(std::ostream& os) const;
     void load(std::istream& is);

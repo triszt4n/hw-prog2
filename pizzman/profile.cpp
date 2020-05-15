@@ -1,11 +1,13 @@
 /**
  * @file profile.cpp
+ * @brief Profile abstract class definitions
  */
 
 #include "profile.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
+
 
 /**
  * @brief Simple getter for getting the username of object

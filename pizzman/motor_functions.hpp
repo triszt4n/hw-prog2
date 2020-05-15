@@ -1,3 +1,9 @@
+/**
+ * \file motor_functions.hpp
+ * @brief Database motor functions migrated from main
+ * Contains: login and register functions as well
+ */
+
 #ifndef MOTOR_FUNCTIONS_H
 #define MOTOR_FUNCTIONS_H
 
@@ -7,6 +13,7 @@
 #include <ctime>
 #include <fstream>
 #include <iomanip>
+#include <stdexcept>
 
 using std::endl;
 using std::cout;
@@ -16,7 +23,6 @@ using std::string;
 using std::ifstream;
 using std::ofstream;
 
-#include "memtrace.h"
 #include "admin.h"
 #include "profile.h"
 #include "customer.h"
@@ -28,8 +34,35 @@ using std::ofstream;
 #include "profile_handler.h"
 #include "usefulio.hpp"
 
+/// Frequently used iterators redefined to be shorter
 /**
- * @fn regCustomer
+ * @typedef OrdIter
+ * @brief Used for orders (pointer store) list's iterator
+ */
+typedef List<Order*>::iterator OrdIter;
+
+/**
+ * @typedef TopIter
+ * @brief Used for toppings (pointer store) list's iterator
+ */
+typedef List<Topping*>::iterator TopIter;
+
+/**
+ * @typedef PizzaIter
+ * @brief Used for pizzas (pointer store) list's iterator
+ */
+typedef List<Pizza*>::iterator PizzaIter;
+
+/**
+ * @typedef ProfIter
+ * @brief Used for profiles (heterogeneous store) list's iterator
+ */
+typedef List<Profile*>::iterator ProfIter;
+
+
+
+
+/**
  * @brief registers customer
  * @return true if registration was a success
  */
@@ -63,7 +96,6 @@ inline bool regCustomer(List<Profile*>& profiles) {
 }
 
 /**
- * @fn login
  * @brief logs in user --> passes data into parameters given
  * @param userLoggedIn - will get the user profile that logged in
  * @param userRights - will get the Rights of user logged in
@@ -81,15 +113,17 @@ inline Profile* login(Rights& userRights, List<Profile*>& profiles) {
         return NULL;
     }
 
-    Profile* foundPointer;
-    for (List<Profile*>::iterator iter = profiles.begin(); iter != profiles.end(); ++iter) {
-        Rights tempRights = (*iter)->verifyLogin(username, pw);
-        if (tempRights != NOT_MATCHING) {
-            userRights = tempRights;
-            foundPointer = (*iter);
-        }
+    Customer dummy = Customer(username);    ///< It's not relevant what type of Profile we create, as
+                                            ///< operator== work with all kind of Profiles' usernames.
+                                            ///< @see profile.h operator==() and list.hpp find_p()
+    ProfIter found = profiles.find_p(&dummy);
+    if (found == profiles.end()) {
+        return NULL;
     }
-    return foundPointer; ///< has to be discussed
+    else {
+        userRights = (*found)->verifyLogin(username, pw);
+        return *found;
+    }
 }
 
 /**
@@ -122,16 +156,16 @@ inline bool preloadProfiles(List<Profile*>& profiles, const string& fileName) {
 }
 
 /**
- * @brief loading up toppings with data from give file
- * @return true if loading was successful
+ * @brief Loading up toppings with data from give file
+ * @return true if no fatal error at loading
  */
 inline bool preloadToppings(List<Topping*>& toppings, const string& fileName) {
     ifstream is;
     is.open(fileName);
     if (!is) {
-        cerr << "\n------\nERROR: No file found: \"" << fileName << "\"\n------\n\n";
+        cerr << "\n------\nNOTE: No file found: \"" << fileName << "\"\n------\n\n";
         is.close();
-        return false;
+        return true;
     }
 
     size_t inputNum;
@@ -149,35 +183,36 @@ inline bool preloadToppings(List<Topping*>& toppings, const string& fileName) {
 }
 
 /**
- * @brief preloading pizzas with data from given file
- * @return true if loading was successful
+ * @brief Loading up pizzas with data from given file
+ * @return true if no fatal error at loading
+ * @see pizza.h for loadPizzas()
  */
-bool preloadPizzas(List<Pizza*>& pizzas, const string& fileName) {
+bool preloadPizzas(List<Pizza*>& pizzas, List<Topping*>& toppings, const string& fileName) {
     ifstream is;
     is.open(fileName);
     if (!is) {
-        cerr << "\n------\nERROR: No file found: \"" << fileName << "\"\n------\n\n";
+        cerr << "\n------\nNOTE: No file found: \"" << fileName << "\"\n------\n\n";
         is.close();
-        return false;
+        return true;
     }
 
-    loadPizzas(pizzas, is); /// source: pizza.h
+    loadPizzas(pizzas, toppings, is);     ///< @see source: pizza.h
 
     is.close();
     return true;
 }
 
 /**
- * @brief loading up orders with data from give file
- * @return true if loading was successful
+ * @brief Loading up orders with data from give file
+ * @return true if no fatal error at loading
  */
-bool preloadOrders(List<Order*>& orders, const string& fileName) {
+bool preloadOrders(List<Order*>& orders, List<Topping*>& toppings, const string& fileName) {
     ifstream is;
     is.open(fileName);
     if (!is) {
-        cerr << "\n------\nERROR: No file found: \"" << fileName << "\"\n------\n\n";
+        cerr << "\n------\nNOTE: No file found: \"" << fileName << "\"\n------\n\n";
         is.close();
-        return false;
+        return true;
     }
 
     size_t inputNum;
@@ -185,7 +220,7 @@ bool preloadOrders(List<Order*>& orders, const string& fileName) {
 
     for (size_t i = 0; i < inputNum; ++i) {
         Order inputOrder;
-        bool canPut = inputOrder.load(is);
+        bool canPut = inputOrder.load(is, toppings);
         if (canPut)
             orders.insert(inputOrder.clone());
     }
@@ -202,10 +237,8 @@ void saveList(List<T>& items, const string& fileName) {
     ofstream os(fileName);
 
     os << items.size() << endl;
-    for (typename List<T>::iterator iter = items.begin(); iter != items.end(); ++iter) {
-        std::cout << "saving: " << (*iter)->getName() << std::endl; /// DEBUG
+    for (typename List<T>::iterator iter = items.begin(); iter != items.end(); ++iter)
         (*iter)->save(os);
-    }
 }
 
 /**
@@ -213,10 +246,8 @@ void saveList(List<T>& items, const string& fileName) {
  */
 template<typename T>
 void freeList(List<T>& items) {
-    for (typename List<T>::iterator iter = items.begin(); iter != items.end(); ++iter) {
-        std::cout << "deleting: " << (*iter)->getName() << std::endl; /// DEBUG
+    for (typename List<T>::iterator iter = items.begin(); iter != items.end(); ++iter)
         delete *iter;
-    }
 }
 
 #endif // MOTOR_FUNCTIONS_H

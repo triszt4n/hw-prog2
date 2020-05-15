@@ -1,5 +1,6 @@
 /**
  * @file profile_handler.h
+ * @brief ProfileHandler class declaration
  */
 
 #ifndef PROFILE_HANDLER_H
@@ -8,6 +9,11 @@
 #include <iostream>
 #include "profile.h"
 
+/**
+ * @class ProfileHandler
+ * @brief A helping class to handle persistence of heterogeneous store of Profile*-s
+ * Should need refactor upon new Profile child implementation
+ */
 class ProfileHandler {
     struct KVPair {
         std::string key;

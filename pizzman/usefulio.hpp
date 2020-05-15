@@ -1,3 +1,8 @@
+/**
+ * \file usefulio.hpp
+ * @brief Useful persistence helper functions
+ */
+
 #ifndef USEFULIO_H
 #define USEFULIO_H
 

@@ -1,5 +1,6 @@
 /**
  * @file admin.h
+ * @brief Admin class declaration
  */
 
 #ifndef ADMIN_H
@@ -9,6 +10,10 @@
 #include <iostream>
 #include "profile.h"
 
+/**
+ * @class Admin
+ * @brief Child class of a Profile, defines an administrator's attributes
+ */
 class Admin: public Profile {
 public:
     Admin(): Profile("DUMMY", "", "") { }
@@ -16,6 +21,7 @@ public:
         Profile(username, pw, name) { }
 
     Rights verifyLogin(const std::string& username, const std::string& pw) const;
+
     void greetings(std::ostream& os) const;
     void save(std::ostream& os) const;
     void load(std::istream& is);

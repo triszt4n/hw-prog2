@@ -1,5 +1,6 @@
 /**
  * @file profile.h
+ * @brief Profile abstract class declaration
  */
 
 #ifndef PROFILE_H

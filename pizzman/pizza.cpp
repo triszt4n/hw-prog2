@@ -1,5 +1,7 @@
 /**
  * @file pizza.cpp
+ * @brief Pizza class definitions
+ * Contains: +copyItems() friend function, +loadPizzas() function
  */
 
 #include "pizza.h"
@@ -9,18 +11,83 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <stdexcept>
+
+/**
+ * @typedef ItemIter
+ * @brief Used for Pizza's own items List iterator
+ */
+typedef List<Topping>::iterator ItemIter;
 
 /**
  * @typedef TopIter
- * @brief Used for topping list's iterator
+ * @brief Used for toppings (heterostore) list's iterator
  */
-typedef List<int>::iterator TopIter;
+typedef List<Topping*>::iterator TopIter;
 
-void Pizza::save(std::ostream& os) {
 
+
+
+
+/**
+ * @brief Copying object's items into other one (overload for Pizza)
+ * @param pizzaSource - source, that's items will get copied
+ * @param pizzaDest - destination, into the items will get copied
+ * @see Used by assign operator ...
+ */
+void copyItems(const Pizza& pizzaSource, Pizza& pizzaDest) {
+    pizzaDest.items.clear();
+    for (ItemIter iter = pizzaSource.items.begin(); iter != pizzaSource.items.end(); ++iter) {
+        pizzaDest.items.insert(*iter);
+    }
 }
 
-bool Pizza::load(std::istream& is) {
+/**
+ * @brief Assign operator for Pizza
+ * @see Used by order.h
+ */
+Pizza& Pizza::operator=(const Pizza& rhs) {
+    if (&rhs == this)
+        return *this;
+    else {
+        serialNum = rhs.getSerialNum();
+        name = rhs.getName();
+        price = rhs.getPrice();
+        copyItems(rhs, *this);
+        return *this;
+    }
+}
+
+/**
+ * @brief Copy constructor
+ * Depends highly on assign operator
+ */
+Pizza::Pizza(const Pizza& pizza) {
+    *this = pizza;
+}
+
+
+
+
+/// --------------------- Persistence ----------------------
+
+/**
+ * @brief Simple I/O function for object storing
+ */
+void Pizza::save(std::ostream& os) const {
+    os << serialNum << ' ';
+    writeString(os, name);
+    os << price << ' ' << items.size() << ' ';
+    for (ItemIter iter = items.begin(); iter != items.end(); ++iter) {
+        os << iter->getSerialNum() << ' ';
+    }
+    os << std::endl;
+}
+
+/**
+ * @brief Simple I/O function for object storing
+ */
+bool Pizza::load(std::istream& is, List<Topping*>& toppings) {
     (is >> serialNum).ignore(1);
     name = readString(is);
 
@@ -34,95 +101,110 @@ bool Pizza::load(std::istream& is) {
     for (size_t i = 0; i < toppingNum; ++i) {
         int serial;
         is >> serial;
-        toppingList.insert(serial);
+        TopIter found = toppings[serial];
+        if (found != toppings.end())
+            items.insert(*(*found));
     }
     return true;
 }
 
+/// ------------------ End of Persistence ------------------
+
+
+
+
+/// ----------------------- Getters ------------------------
+
 /**
- * @brief Simple getter for getting the serialNum of object
- * @return serialNum
+ * @brief Getting serialNum of object
  */
 int Pizza::getSerialNum() const {
     return serialNum;
 }
 
 /**
- * @brief Simple getter for getting the name of object
- * @return name
+ * @brief Getting name of object
  */
 std::string Pizza::getName() const {
     return name;
 }
 
 /**
- * @brief Simple getter for getting the price of object
- * @return price
+ * @brief Getting price of object
  */
 int Pizza::getPrice() const {
     return price;
 }
 
 /**
- * @brief Displays toppings onto a stream
+ * @brief Displays pizza's toppings onto a stream
  */
-void Pizza::displayToppingList(std::ostream& os, List<Topping*>& toppings) const {
-    for (TopIter iter = toppingList.begin(); iter != toppingList.end(); ++iter) {
-        int serial = *iter;
-        Topping* top = toppings[serial];
-        os << "+ #" << serial << " " << top->getName() << std::endl;
+void Pizza::displayItems(std::ostream& os) const {
+    for (ItemIter iter = items.begin(); iter != items.end(); ++iter) {
+        os << "- ";
+        iter->displayTopping(os, false);
     }
 }
 
 /**
- * @brief Copying object's toppingList into other one
- * @param pizzaSource - source, that's toppingList will get copied
- * @param pizzaDest - destination, into the toppingList will get copied
+ * @brief Displays pizza's all details onto a stream
  */
-void copyToppingList(const Pizza& pizzaSource, Pizza& pizzaDest) {
-    pizzaDest.toppingList.clear();
-    for (TopIter iter = pizzaSource.toppingList.begin(); iter != pizzaSource.toppingList.end(); ++iter) {
-        pizzaDest.toppingList.insert(*iter);
-    }
-}
-/// Overloading
-void copyToppingList(List<int>& toppingListSource, Pizza& pizzaDest) {
-    pizzaDest.toppingList.clear();
-    for (TopIter iter = toppingListSource.begin(); iter != toppingListSource.end(); ++iter) {
-        pizzaDest.toppingList.insert(*iter);
-    }
+void Pizza::displayPizza(std::ostream& os) const {
+    os << "#" << serialNum << " " << name << " - " << price << " Ft" << std::endl;
+    displayItems(os);
+    os << std::endl;
 }
 
 /**
- * @brief Copy constructor
+ * @brief Writes items onto a file stream
  */
-Pizza::Pizza(const Pizza& pizza) {
-    serialNum = pizza.getSerialNum();
-    name = pizza.getName();
-    price = pizza.getPrice();
-    copyToppingList(pizza, *this);
+void Pizza::writeItems(std::ostream& os) const {
+    os << items.size() << ' ';
+    for (ItemIter iter = items.begin(); iter != items.end(); ++iter) {
+        os << iter->getSerialNum() << ' ';
+    }
 }
 
+/// -------------------- End of Getters --------------------
+
+
+
+
+
+
+/// ----------------------- Setters ------------------------
+
 /**
- * @fn addTopping(const int& toppingSerial, const int& toppingPrice)
  * @brief Inserts the serial of topping to the list of toppings in the pizza
  * Also, the price is incremented by the price of the new topping.
- * @param toppingSerial - the serialNum of topping to be inserted
- * @param toppingPrice - the price the, pizza's cost shall be incremented with
+ * @param serial - the serialNum of topping to be inserted
+ * @return true, if insertion was successful
  */
-void Pizza::addTopping(const int& toppingSerial, const int& toppingPrice) {
-    toppingList.insert(toppingSerial);
-    price += toppingPrice;
+bool Pizza::addTopping(List<Topping*>& toppings, const int& serial) {
+    TopIter top = toppings[serial];
+    if (top == toppings.end()) {
+        return false;
+    }
+    else {
+        items.insert(*(*top));
+        price += (*top)->getPrice();
+        return true;
+    }
 }
 
 /**
- * @fn setPrice(int p)
  * @brief Admin can reset the price to an amount they want
  * @param p - price to be set to
  */
 void Pizza::setPrice(const int& p) {
     price = p;
 }
+
+/// -------------------- End of Setters --------------------
+
+
+
+
 
 /**
  * @brief Comparator for pizzas
@@ -134,10 +216,26 @@ bool Pizza::operator==(const Pizza& rhs) const {
 }
 
 /**
- * @fn clone(): Pizza*
- * @brief clone the current Pizza object
- * @return a pointer of new copy of this object (should be deleted by caller)
+ * @brief Cloning method
+ * @return a pointer with clone object
  */
 Pizza* Pizza::clone() const {
     return new Pizza(*this);
+}
+
+/**
+ * @brief loading up pizzas with data from give file
+ * @return true if loading was successful
+ */
+bool loadPizzas(List<Pizza*>& pizzas, List<Topping*>& toppings, std::istream& is) {
+    size_t inputNum;
+    (is >> inputNum).ignore(1);
+
+    for (size_t i = 0; i < inputNum; ++i) {
+        Pizza inputPizza;
+        bool canPut = inputPizza.load(is, toppings);
+        if (canPut)
+            pizzas.insert(inputPizza.clone());
+    }
+    return true;
 }

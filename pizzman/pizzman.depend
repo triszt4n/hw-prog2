@@ -136,7 +136,7 @@
 1588028089 source:c:\users\trisztan\documents\programming\pizzman\list.cpp
 	"list.h"
 
-1589239587 source:c:\users\trisztan\documents\programming\myhw\pizzman\admin.cpp
+1589403385 source:c:\users\trisztan\documents\programming\myhw\pizzman\admin.cpp
 	"admin.h"
 	"profile.h"
 	"usefulio.hpp"
@@ -144,17 +144,17 @@
 	<iostream>
 	<string>
 
-1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\admin.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\admin.h
 	<string>
 	<iostream>
 	"profile.h"
 
-1589239604 c:\users\trisztan\documents\programming\myhw\pizzman\profile.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\profile.h
 	<string>
 	<iostream>
 	<ctime>
 
-1589245005 source:c:\users\trisztan\documents\programming\myhw\pizzman\customer.cpp
+1589403385 source:c:\users\trisztan\documents\programming\myhw\pizzman\customer.cpp
 	"customer.h"
 	"profile.h"
 	"usefulio.hpp"
@@ -162,12 +162,12 @@
 	<iostream>
 	<string>
 
-1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\customer.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\customer.h
 	<string>
 	<iostream>
 	"profile.h"
 
-1589239665 source:c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.cpp
+1589403384 source:c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.cpp
 	"deliverer.h"
 	"profile.h"
 	"usefulio.hpp"
@@ -175,7 +175,7 @@
 	<iostream>
 	<string>
 
-1589297459 c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\deliverer.h
 	<string>
 	<iostream>
 	"profile.h"
@@ -201,7 +201,7 @@
 	<algorithm>
 	<functional>
 
-1589276460 source:c:\users\trisztan\documents\programming\myhw\pizzman\order.cpp
+1589411558 source:c:\users\trisztan\documents\programming\myhw\pizzman\order.cpp
 	"order.h"
 	"list.hpp"
 	"usefulio.hpp"
@@ -209,37 +209,35 @@
 	<iostream>
 	<string>
 	<ctime>
+	<stdexcept>
 
-1589273832 c:\users\trisztan\documents\programming\myhw\pizzman\order.h
+1589403384 c:\users\trisztan\documents\programming\myhw\pizzman\order.h
 	<iostream>
 	<string>
 	<ctime>
 	"pizza.h"
 	"list.hpp"
 
-1589271391 c:\users\trisztan\documents\programming\myhw\pizzman\pizza.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\pizza.h
 	<iostream>
 	<string>
 	"list.hpp"
 	"topping.h"
 
-1589298823 c:\users\trisztan\documents\programming\myhw\pizzman\list.hpp
+1589418384 c:\users\trisztan\documents\programming\myhw\pizzman\list.hpp
 	<cstdlib>
 	<stdexcept>
-	"profile.h"
 
-1589273430 c:\users\trisztan\documents\programming\myhw\pizzman\topping.h
+1589403384 c:\users\trisztan\documents\programming\myhw\pizzman\topping.h
 	<iostream>
 	<string>
 
-1589283524 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizzman_main.cpp
+1589417514 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizzman_main.cpp
 	<cstdlib>
-	<iostream>
 	<string>
-	<ctime>
-	<fstream>
-	<iomanip>
-	<exception>
+	<iostream>
+	<vector>
+	<stdexcept>
 	"memtrace.h"
 	"admin.h"
 	"profile.h"
@@ -249,18 +247,17 @@
 	"pizza.h"
 	"order.h"
 	"topping.h"
-	"profile_handler.h"
-	"usefulio.hpp"
 	"motor_functions.hpp"
 	"menus.hpp"
+	"catch.hpp"
 
-1589234445 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile.cpp
+1589403385 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile.cpp
 	"profile.h"
 	<cstdlib>
 	<iostream>
 	<string>
 
-1589244256 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.cpp
+1589403385 source:c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.cpp
 	"profile_handler.h"
 	"admin.h"
 	"customer.h"
@@ -269,18 +266,19 @@
 	<iostream>
 	<string>
 
-1589103733 c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.h
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\profile_handler.h
 	<iostream>
 	"profile.h"
 
-1589273430 source:c:\users\trisztan\documents\programming\myhw\pizzman\topping.cpp
+1589411558 source:c:\users\trisztan\documents\programming\myhw\pizzman\topping.cpp
 	"topping.h"
 	"usefulio.hpp"
 	<cstdlib>
 	<iostream>
 	<string>
+	<stdexcept>
 
-1589298232 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizza.cpp
+1589411558 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizza.cpp
 	"pizza.h"
 	"list.hpp"
 	"topping.h"
@@ -288,20 +286,21 @@
 	<cstdlib>
 	<iostream>
 	<string>
+	<stdexcept>
 
-1589149780 c:\users\trisztan\documents\programming\myhw\pizzman\usefulio.hpp
+1589403385 c:\users\trisztan\documents\programming\myhw\pizzman\usefulio.hpp
 	<iostream>
 	<string>
 	<cstdlib>
 
-1589297433 c:\users\trisztan\documents\programming\myhw\pizzman\motor_functions.hpp
+1589418384 c:\users\trisztan\documents\programming\myhw\pizzman\motor_functions.hpp
 	<cstdlib>
 	<iostream>
 	<string>
 	<ctime>
 	<fstream>
 	<iomanip>
-	"memtrace.h"
+	<stdexcept>
 	"admin.h"
 	"profile.h"
 	"customer.h"
@@ -313,24 +312,316 @@
 	"profile_handler.h"
 	"usefulio.hpp"
 
-1589298492 c:\users\trisztan\documents\programming\myhw\pizzman\menus.hpp
+1589411558 c:\users\trisztan\documents\programming\myhw\pizzman\menus.hpp
 	<cstdlib>
 	<iostream>
 	<string>
 	<ctime>
 	<fstream>
 	<iomanip>
+	<stdexcept>
+	"admin.h"
+	"profile.h"
+	"customer.h"
+	"deliverer.h"
+	"list.hpp"
+	"pizza.h"
+	"order.h"
+	"topping.h"
+
+1589406715 c:\users\trisztan\documents\programming\myhw\pizzman\catch.hpp
+	<TargetConditionals.h>
+	<ciso646>
+	<iosfwd>
+	<string>
+	<cstdint>
+	<vector>
+	<cstddef>
+	<string>
+	<iosfwd>
+	<cassert>
+	<type_traits>
+	<vector>
+	<cstddef>
+	<type_traits>
+	<string>
+	<iosfwd>
+	<cstddef>
+	<ostream>
+	<vector>
+	<string_view>
+	<utility>
+	<optional>
+	<tuple>
+	<variant>
+	<ctime>
+	<ratio>
+	<chrono>
+	<iosfwd>
+	<string>
+	<chrono>
+	<string>
+	<vector>
+	<cstddef>
+	<string>
+	<cstdint>
+	<string>
+	<string>
+	<memory>
 	<exception>
-	"memtrace.h"
-	"admin.h"
-	"profile.h"
-	"customer.h"
-	"deliverer.h"
+	<string>
+	<vector>
+	<type_traits>
+	<string>
+	<iosfwd>
+	<vector>
+	<string>
+	<vector>
+	<functional>
+	<string>
+	<string>
+	<algorithm>
+	<memory>
+	<exception>
+	<memory>
+	<vector>
+	<cassert>
+	<utility>
+	<exception>
+	<memory>
+	<chrono>
+	<iosfwd>
+	<string>
+	<vector>
+	<memory>
+	<cstdint>
+	<random>
+	<string>
+	<vector>
+	<memory>
+	<string>
+	<string>
+	<vector>
+	<memory>
+	<string>
+	<memory>
+	<vector>
+	<string>
+	<string>
+	<string>
+	<iosfwd>
+	<map>
+	<set>
+	<memory>
+	<algorithm>
+	<algorithm>
+	<cstring>
+	<cfloat>
+	<cstdio>
+	<cassert>
+	<memory>
+	<ostream>
+	<vector>
+	<chrono>
+	<ratio>
+	<atomic>
+	<type_traits>
+	<utility>
+	<cassert>
+	<type_traits>
+	<utility>
+	<memory>
+	<type_traits>
+	<utility>
+	<tuple>
+	<type_traits>
+	<utility>
+	<utility>
+	<type_traits>
+	<algorithm>
+	<algorithm>
+	<functional>
+	<vector>
+	<iterator>
+	<numeric>
+	<tuple>
+	<cmath>
+	<utility>
+	<cstddef>
+	<random>
+	<algorithm>
+	<iterator>
+	<tuple>
+	<vector>
+	<cmath>
+	<algorithm>
+	<vector>
+	<string>
+	<iterator>
+	<algorithm>
+	<iterator>
+	<vector>
+	<algorithm>
+	<functional>
+	<string>
+	<vector>
+	<cmath>
+	<type_traits>
+	<string>
+	<vector>
+	<memory>
+	<cassert>
+	<random>
+	<future>
+	<cmath>
+	<limits>
+	<signal.h>
+	<AfxWin.h>
+	<windows.h>
+	<signal.h>
+	<string>
+	<optional>
+	<cassert>
+	<ostream>
+	<sstream>
+	<vector>
+	<cctype>
+	<string>
+	<memory>
+	<set>
+	<algorithm>
+	<fstream>
+	<ctime>
+	<cstring>
+	<ostream>
+	<sstream>
+	<unistd.h>
+	<string>
+	<android/log.h>
+	<cassert>
+	<sys/types.h>
+	<unistd.h>
+	<cstddef>
+	<ostream>
+	<sys/sysctl.h>
+	<fstream>
+	<string>
+	<stdexcept>
+	<vector>
+	<memory>
+	<map>
+	<cassert>
+	<cerrno>
+	<vector>
+	<string>
+	<memory>
+	<limits>
+	<set>
+	<crtdbg.h>
+	<set>
+	<limits>
+	<algorithm>
+	<iomanip>
+	<string>
+	<algorithm>
+	<cmath>
+	<cstdlib>
+	<cstdint>
+	<cstring>
+	<sstream>
+	<type_traits>
+	<iomanip>
+	<limits>
+	<regex>
+	<cassert>
+	<stack>
+	<cstdio>
+	<iosfwd>
+	<string>
+	<cstdio>
+	<cstring>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<io.h>
+	<unistd.h>
+	<cmath>
+	<vector>
+	<set>
+	<algorithm>
+	<ios>
+	<map>
+	<string>
+	<map>
+	<vector>
+	<exception>
+	<cassert>
+	<algorithm>
+	<sstream>
+	<memory>
+	<iosfwd>
+	<cstdlib>
+	<iomanip>
+	<set>
+	<iterator>
+	<vector>
+	<cstdio>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<memory>
+	<algorithm>
+	<ostream>
+	<cstring>
+	<cctype>
+	<vector>
+	<algorithm>
+	<ostream>
+	<cstring>
+	<cstdint>
+	<sstream>
+	<cctype>
+	<exception>
+	<algorithm>
+	<sstream>
+	<algorithm>
+	<sstream>
+	<algorithm>
+	<cassert>
+	<stdexcept>
+	<memory>
+	<sstream>
+	<algorithm>
+	<string>
+	<vector>
+	<memory>
+	<chrono>
+	<cmath>
+	<iomanip>
+	<cstddef>
+	<exception>
+	<ostream>
+	<iomanip>
+	<type_traits>
+	<cstring>
+	<cfloat>
+	<cstdio>
+	<cassert>
+	<memory>
+	<cfloat>
+	<cstdio>
+	<cassert>
+	<sstream>
+	<ctime>
+	<algorithm>
+	<cassert>
+
+1589414943 source:c:\users\trisztan\documents\programming\myhw\pizzman\pizzman_test.cpp
+	"catch.hpp"
 	"list.hpp"
-	"pizza.h"
-	"order.h"
-	"topping.h"
-	"profile_handler.h"
-	"usefulio.hpp"
-	"motor_functions.hpp"
+	<string>
+	<iostream>
+	<vector>
+	<stdexcept>
 

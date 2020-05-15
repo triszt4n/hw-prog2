@@ -1,5 +1,6 @@
 /**
- * @file list.h
+ * @file list.hpp
+ * @brief List class declaration
  */
 
 #ifndef LIST_H
@@ -7,14 +8,18 @@
 
 #include <cstdlib>
 #include <stdexcept>
-#include "profile.h"
 
 /**
- * @class List
+ * @class List template class
  * @brief Reimplementing the template of a guarded list with its typical methods
+ * Other spicy methods included
  */
 template<typename T>
 class List {
+    /**
+     * @struct ListItem
+     * @brief ListItem structure for a list
+     */
     struct ListItem {
         T data;
         ListItem* next;
@@ -56,8 +61,6 @@ public:
             return actual;
         }
 
-        ~iterator() { delete actual; }
-
         iterator& operator++() {
             if (actual != NULL) {
                 actual = actual->next;
@@ -67,7 +70,7 @@ public:
             return (*this);
         }
 
-        iterator& operator++(int) {
+        iterator operator++(int) {
             iterator temp = (*this);
             operator++();
             return temp;
@@ -77,14 +80,14 @@ public:
             if (actual != NULL)
                 return actual->data;
             else
-                throw std::out_of_range("List is empty.");
+                throw std::out_of_range("This iterator does not point to anything.");
         }
 
         T* operator->() {
             if (actual != NULL)
                 return &actual->data;
             else
-                throw std::out_of_range("List is empty.");
+                throw std::out_of_range("This iterator does not point to anything.");
         }
 
 
@@ -103,12 +106,15 @@ public:
         delete head;
     }
 
+    /**
+     * @brief returns the number of list items in list
+     * @return number
+     */
     size_t size() const {
         return number;
     }
 
     /**
-     * @fn insert(T)
      * @brief inserts an item into the list (at the tail)
      */
     void insert(const T& data) {
@@ -119,7 +125,6 @@ public:
     }
 
     /**
-     * @fn clear()
      * @brief frees all the items in list
      */
     void clear() {
@@ -132,41 +137,55 @@ public:
         number = 0;
     }
 
-    // DEPRECATED: DIDN'T USE IT EVER
     /**
-     * @fn find_p(T): iterator
-     * @brief method assumes T is a pointer itself, finds element in list
-     * Uses indirection to access operator== of any specific type (Profile, Pizza, Topping, Order)
+     * @brief method is useful only for heterogeneous stores (List<X*>)
+     * Upon comparing, the method dereferences both of the items in order to
+     * Work with the dedicated operator== between the two items.
+     * @see pizza.h, order.h, topping.h, profile.h's operator==
      * @return an iterator with the found item
      */
     iterator find_p(const T& data) {
-        for (iterator i = begin(); i != end(); ++i) {
-            if (*(*i) == (*data))
-                return i;
+        for (iterator iter = begin(); iter != end(); ++iter) {
+            if (*(*iter) == (*data))
+                return iter;
         }
         return iterator();
     }
 
-    /// Typical begin()
+    /**
+     * @brief Typical begin()
+     * @return iterator with head item
+     */
     iterator begin() const {
         return iterator(*this);
     }
 
-    /// Typical end()
+    /**
+     * @brief Typical end()
+     * @return iterator with sentinel (blank) item
+     */
     iterator end() const {
         return iterator();
     }
 
-    /// Interesting indexing operator
-    T operator[](const size_t& index) {
-        T found;
-        size_t i = 0;
-        for (iterator iter = begin(); iter != end(); ++iter) {
-            if (i == index)
-                return *iter;
-            ++i;
+    /**
+     * @brief an interesting method that works similarly as find_p
+     * Iterates through list to find the searched "indexed" item
+     * @return an iterator with the found item
+     * @exception if overindexing happens
+     */
+    iterator operator[](const size_t& index) {
+        if (index >= size()) {
+            throw std::out_of_range("Out of range indexing of List");
         }
-        return found;
+        else {
+            size_t i = 0;
+            for (iterator iter = begin(); iter != end(); ++iter, ++i) {
+                if (i == index)
+                    return iter;
+            }
+        }
+        return iterator();
     }
 };
 

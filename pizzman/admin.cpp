@@ -1,5 +1,6 @@
 /**
- * @file admin.cpp
+ * \file admin.cpp
+ * @brief Admin class definitions
  */
 
 #include "admin.h"
@@ -10,7 +11,6 @@
 #include <string>
 
 /**
- * @fn verifyLogin(std::string usern, std::string pw) in Admin
  * @brief Grants the ADMIN rights if the proper username and password is given
  * @param usern - the username input
  * @param pw - the password input
@@ -23,13 +23,25 @@ Rights Admin::verifyLogin(const std::string& usern, const std::string& pw) const
         return NOT_MATCHING;
 }
 
+/**
+ * @brief Greets logged in user
+ */
 void Admin::greetings(std::ostream& os) const {
-    os << "-------------------------" << std::endl;
-    os << "Hi, " << name << " (" << username << ")!" << std::endl;
-    os << "reg: " << ctime(&regDate);
-    os << "-------------------------" << std::endl << std::endl;
+    os << "---------------------------------------------" << std::endl;
+    os << " Hi, " << name << " (" << username << ")!" << std::endl;
+    os << " registered on: " << ctime(&regDate);
+    os << "---------------------------------------------" << std::endl << std::endl;
 }
 
+
+
+
+
+/// -------------------- Persistence -------------------
+
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Admin::save(std::ostream& os) const {
     os << "admin ";
     writeString(os, username);
@@ -38,9 +50,14 @@ void Admin::save(std::ostream& os) const {
     os << regDate << std::endl;
 }
 
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Admin::load(std::istream& is) {
     username = readString(is);
     password = readString(is);
     name = readString(is);
     is >> regDate;
 }
+
+/// ----------------- End of Persistence ----------------

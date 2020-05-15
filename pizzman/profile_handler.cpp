@@ -1,5 +1,6 @@
 /**
  * @file profile_handler.cpp
+ * @brief ProfileHandler class definitions
  */
 
 #include "profile_handler.h"
@@ -10,8 +11,8 @@
 #include <iostream>
 #include <string>
 
+
 /**
- * @fn setPrototypes()
  * @brief Loading up static items of prototypes
  */
 void ProfileHandler::setPrototypes() {
@@ -24,7 +25,6 @@ void ProfileHandler::setPrototypes() {
 }
 
 /**
- * @fn loadOne(std::istream& is): Profile*
  * @brief Finds the prototype by the key read from the stream
  * @return a pointer to the found prototype's value
  */
@@ -47,7 +47,6 @@ Profile* ProfileHandler::loadOne(std::istream& is) {
 }
 
 /**
- * @fn erasePrototypes()
  * @brief Deletes allocated memory for static members
  */
 void ProfileHandler::erasePrototypes() {

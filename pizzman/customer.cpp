@@ -1,5 +1,6 @@
 /**
- * @file customer.cpp
+ * \file customer.cpp
+ * @brief Customer class definitions
  */
 
 #include "customer.h"
@@ -18,7 +19,6 @@ std::string Customer::getAddress() {
 }
 
 /**
- * @fn verifyLogin(std::string usern, std::string pw) in Customer
  * @brief Grants the DEFAULT rights if the proper username and password is given
  * @param usern - the username input
  * @param pw - the password input
@@ -32,16 +32,22 @@ Rights Customer::verifyLogin(const std::string& usern, const std::string& pw) co
 }
 
 /**
- * @brief Casual method for writing out a greeting to the stream
- * @param os - stream to write to
+ * @brief Greets logged in user
  */
 void Customer::greetings(std::ostream& os) const {
-    os << "-------------------------" << std::endl;
-    os << "Hi, " << name << " (" << username << ")!" << std::endl;
-    os << (address == "" ? "*no address*" : address) << ", " << mobile << std::endl;
-    os << "registered on: " << ctime(&regDate);
-    os << "-------------------------" << std::endl << std::endl;
+    os << "---------------------------------------------" << std::endl;
+    os << " Hi, " << name << " (" << username << ")!" << std::endl;
+    os << "       address: " << (address == "" ? "*no address*" : address) << std::endl;
+    os << "        mobile: " << mobile << std::endl;
+    os << " registered on: " << ctime(&regDate);
+    os << "---------------------------------------------" << std::endl << std::endl;
 }
+
+
+
+
+
+/// --------------------- Setters ----------------------
 
 /**
  * @brief Simple setter for address
@@ -59,6 +65,17 @@ void Customer::setMobile(const std::string& mob) {
     mobile = mob;
 }
 
+/// ------------------ End of Setters ------------------
+
+
+
+
+
+/// -------------------- Persistence -------------------
+
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Customer::save(std::ostream& os) const {
     os << "customer ";
     writeString(os, username);
@@ -69,6 +86,9 @@ void Customer::save(std::ostream& os) const {
     os << regDate << std::endl;
 }
 
+/**
+ * @brief Simple I/O function for object storing
+ */
 void Customer::load(std::istream& is) {
     username = readString(is);
     password = readString(is);
@@ -77,3 +97,6 @@ void Customer::load(std::istream& is) {
     mobile = readString(is);
     is >> regDate;
 }
+
+/// ----------------- End of Persistence ----------------
+
