@@ -2,3 +2,7 @@
 *.o
 ./pizzman/bin
 ./pizzman/obj
+./pizzman/doxygen/latex
+./pizzman/doxygen/html
+./pizzman/doxygen/pizzman.chm
+./pizzman/doxygen/pizzman.chw
